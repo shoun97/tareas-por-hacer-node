@@ -20,9 +20,31 @@ class Tareas {
 
     }
 
+    cargarTareasFromArray( tareas = []){
+        tareas.forEach(t =>{
+            this._listado[t.id] = t
+        })
+    }
+
     crearTarea(desc = ''){
         const tarea = new Tarea(desc);
         this._listado[tarea.id] = tarea; 
+    }
+    listadoCompleto(){
+        //console.log(this._listado);
+        let lista = '';
+        let estado = 'Pendiente'.red;
+
+        for(let i in this.listadoArr){
+            
+            if(this.listadoArr[i].completadoEn != null){estado='Completada'.green;}
+            
+            lista+= `\n${(parseInt(i)+1).toString().green}. ${this.listadoArr[i]['desc']} :: ${estado}`
+
+            estado = 'Pendiente'.red
+        }
+        
+        return lista;
     }
 }
 
